@@ -21,7 +21,7 @@
                     class="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group">
                     <div class="flex items-center">
                         <i class="fas fa-folder w-5 h-5 text-gray-500 group-hover:text-blue-600"></i>
-                        <span class="ml-3 font-medium">Institute</span>
+                        <span class="ml-3 font-medium">Users Manage</span>
                     </div>
                     <i id="institute-icon" class="fas fa-chevron-right transition-transform duration-200"></i>
                 </button>
@@ -110,7 +110,7 @@
 
 
 
-        <a href=""
+        <a href="{{ route('roles.index') }}"
             class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group">
             <i class="fas fa-user-shield w-5 h-5 text-gray-500 group-hover:text-blue-600"></i>
             <span class="ml-3 font-medium">Roles & Permission</span>
