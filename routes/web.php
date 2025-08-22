@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/login');
@@ -12,6 +13,9 @@ Route::prefix('oxadmin')->middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/', [DashboardController::class, 'index'])->name('oxadmin');
+
+    // User Profile with Create user
+    Route::resource('userprofile',UserProfileController::class);
 
 
     // role permission
