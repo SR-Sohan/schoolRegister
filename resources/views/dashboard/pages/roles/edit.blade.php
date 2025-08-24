@@ -30,26 +30,31 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                         @foreach ($permissions as $module => $modulePermissions)
-                            <div class="bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-4 shadow-sm">
+                            <div
+                                class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-2xl shadow-lg p-4 transition hover:shadow-xl">
+
+                                {{-- Module Title --}}
                                 <h3 class="text-lg font-semibold text-gray-800 dark:text-white capitalize mb-3">
-                                    {{ $module }}
+                                    {{ ucwords($module) }}
                                 </h3>
 
+                                {{-- Permissions --}}
                                 <div class="space-y-2">
                                     @foreach ($modulePermissions as $permission)
-                                        <label for="permission-{{ $permission->id }}" class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                                        <label class="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-200">
                                             <input type="checkbox" name="permissions[]" value="{{ $permission->name }}"
-                                                id="permission-{{ $permission->id }}"
                                                 {{ $role->hasPermissionTo($permission->name) ? 'checked' : '' }}
-                                                class="h-4 w-4 text-blue-600 dark:bg-gray-800 dark:border-gray-600 rounded focus:ring-blue-500">
-                                            <span>{{ $permission->name }}</span>
+                                                class="h-4 w-4 text-green-600 dark:bg-gray-700 dark:border-gray-600 rounded focus:ring-green-500">
+                                            <span>{{ ucwords(str_replace(['-', '_', '.'], ' ', $permission->name)) }}</span>
                                         </label>
                                     @endforeach
                                 </div>
+
                             </div>
                         @endforeach
                     </div>
                 </div>
+
 
                 {{-- Submit --}}
                 <div class="pt-4 text-right">

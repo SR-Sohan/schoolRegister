@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\UserProfileRepositoryInterface;
-use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Role;
 
-class UserProfileController extends Controller
+class UserProfileController extends Controller implements HasMiddleware
 {
 
     protected $userProfileRepository;
@@ -16,11 +17,28 @@ class UserProfileController extends Controller
     {
         $this->userProfileRepository = $userProfileRepository;
     }
+
+   public static function middleware(): array
+    {
+        return [
+            // read
+            new Middleware('permission:users-user.view', only: ['index','show']),
+
+            // create
+            new Middleware('permission:users-user.create', only: ['create','store']),
+
+            // update
+            new Middleware('permission:users-user.edit', only: ['edit','update']),
+
+            // delete
+            new Middleware('permission:users-user.delete', only: ['destroy']),
+        ];
+    }
     public function index()
     {
         $data = $this->userProfileRepository->all();
-        $allColumns = ['name', 'school_name', 'address', 'email', 'mobile', 'is_active',];
-        $visibleColumns = ['name', 'school_name', 'email', 'is_active'];
+        $allColumns = ['name', 'school_name', 'role_names','address', 'email', 'mobile', 'is_active',];
+        $visibleColumns = ['name', 'school_name','role_names', 'email', 'is_active'];
         return view('dashboard.pages.user.index', compact('data', 'allColumns', 'visibleColumns'));
     }
 

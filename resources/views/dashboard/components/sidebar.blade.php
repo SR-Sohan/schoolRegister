@@ -15,60 +15,78 @@
                 <span class="ml-3 font-medium">Dashboard</span>
             </a>
 
+            @canany(['users'])
+                <div class="space-y-1">
+                    <button onclick="toggleSubmenu('institute')"
+                        class="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group">
+                        <div class="flex items-center">
+                            <i class="fas fa-folder w-5 h-5 text-gray-500 group-hover:text-blue-600"></i>
+                            <span class="ml-3 font-medium">Users Manage</span>
+                        </div>
+                        <i id="institute-icon" class="fas fa-chevron-right transition-transform duration-200"></i>
+                    </button>
+                    @canany(['users-user.view', 'users-user.create', 'users-user.edit', 'users-user.delete'])
+                        <div id="institute-submenu" class="hidden pl-8 space-y-1">
 
-            <div class="space-y-1">
-                <button onclick="toggleSubmenu('institute')"
-                    class="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group">
-                    <div class="flex items-center">
-                        <i class="fas fa-folder w-5 h-5 text-gray-500 group-hover:text-blue-600"></i>
-                        <span class="ml-3 font-medium">Users Manage</span>
-                    </div>
-                    <i id="institute-icon" class="fas fa-chevron-right transition-transform duration-200"></i>
-                </button>
-                <div id="institute-submenu" class="hidden pl-8 space-y-1">
+                            <a href="{{ route('userprofile.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">Users<a>
 
-                    <a href="{{ route('userprofile.index') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">Users<a>
-
+                        </div>
+                    @endcanany
                 </div>
-            </div>
+            @endcanany
+
+            @canany(['sessions'])
+                <div class="space-y-1">
+                    <button onclick="toggleSubmenu('exams')"
+                        class="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group">
+                        <div class="flex items-center">
+                            <i class="fas fa-chart-bar w-5 h-5 text-gray-500 group-hover:text-blue-600"></i>
+                            <span class="ml-3 font-medium">Manage Session</span>
+                        </div>
+                        <i id="exams-icon" class="fas fa-chevron-right transition-transform duration-200"></i>
+                    </button>
+                    <div id="exams-submenu" class="hidden pl-8 space-y-1">
+
+                        @canany(['sessions-class.view', 'sessions-class.create', 'sessions-class.edit',
+                            'sessions-class.delete'])
+                            <a href=""
+                                class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                                Mange Class</a>
+                        @endcanany
+
+                        @canany(['sessions-group.view', 'sessions-group.create', 'sessions-group.edit',
+                            'sessions-group.delete'])
+                            <a href=""
+                                class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                                Manage Group</a>
+                        @endcanany
+
+                        @canany(['sessions-subject.view', 'sessions-subject.create', 'sessions-subject.edit',
+                            'sessions-subject.delete'])
+                            <a href=""
+                                class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                                Manage Subjects</a>
+                        @endcanany
+
+                         @canany(['sessions-register.view', 'sessions-register.create', 'sessions-register.edit',
+                            'sessions-register.delete'])
+                            <a href=""
+                                class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                                Manage Registration</a>
+                        @endcanany
+
+                         @canany(['sessions-form.view', 'sessions-form.create', 'sessions-form.edit',
+                            'sessions-form.delete'])
+                            <a href=""
+                                class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                                Manage Form Fipa</a>
+                        @endcanany
 
 
-
-
-            <div class="space-y-1">
-                <button onclick="toggleSubmenu('exams')"
-                    class="w-full flex items-center justify-between px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group">
-                    <div class="flex items-center">
-                        <i class="fas fa-chart-bar w-5 h-5 text-gray-500 group-hover:text-blue-600"></i>
-                        <span class="ml-3 font-medium">Manage Session</span>
                     </div>
-                    <i id="exams-icon" class="fas fa-chevron-right transition-transform duration-200"></i>
-                </button>
-                <div id="exams-submenu" class="hidden pl-8 space-y-1">
-
-
-                    <a href=""
-                        class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
-                        Class</a>
-
-
-
-                    <a href=""
-                        class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">Group</a>
-
-
-
-                    <a href=""
-                        class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">Subjects</a>
-
-
-                    <a href=""
-                        class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">Sessions</a>
-
                 </div>
-            </div>
-
+            @endcanany
             @canany(['view.school', 'create.school', 'edit.school', 'delete.school'])
                 <div class="space-y-1">
                     <button onclick="toggleSubmenu('school-register')"
@@ -98,7 +116,8 @@
 
 
 
-            @can(['manage-roles', 'manage-permissions'])
+            @can(['rolepermission', 'rolepermission-permission.view', 'rolepermission-permission.create',
+                'rolepermission-permission.edit', 'rolepermission-permission.edit'])
                 <a href="{{ route('roles.index') }}"
                     class="flex items-center px-4 py-3 text-gray-700 dark:text-gray-200 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-200 group">
                     <i class="fas fa-user-shield w-5 h-5 text-gray-500 group-hover:text-blue-600"></i>

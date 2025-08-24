@@ -104,6 +104,7 @@
                                         {{ $row->profile->school_name ?? '-' }}
                                     @elseif ($col === 'address')
                                         {{ $row->profile->address ?? '-' }}
+
                                     @else
                                         {{ $row->$col ?? '-' }}
                                     @endif

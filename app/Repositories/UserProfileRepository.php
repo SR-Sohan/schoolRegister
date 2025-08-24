@@ -14,7 +14,12 @@ class UserProfileRepository implements UserProfileRepositoryInterface
 {
     public function all()
     {
-        return User::with('profile')->get();
+        return User::with(['profile', 'roles'])
+            ->get()
+            ->map(function ($user) {
+                $user->role_names = $user->roles->pluck('name')->implode(', ');
+                return $user;
+            });
     }
 
     public function find($id)
