@@ -11,7 +11,7 @@ class GroupModuleRepository implements GroupModuleRepositoryInterface
 {
     public function all()
     {
-        return GroupModule::with('user')->get();
+        return GroupModule::with(['user','class'])->get();
     }
 
     public function find($id)

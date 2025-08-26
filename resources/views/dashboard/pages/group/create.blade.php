@@ -20,39 +20,64 @@
             <!-- Row: Name + Email -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
+                <!-- Class Select -->
+                <div>
+                    <label for="class_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Select Class
+                    </label>
+                    <select name="class_id" id="class_id"
+                        class="w-full px-4 py-3 bg-white dark:bg-gray-800 border
+            @error('class_id') border-red-500 @else border-gray-300 dark:border-gray-600 @enderror
+            rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none text-gray-900 dark:text-white">
+
+                        <option value="">-- Select a Class --</option>
+                        @foreach ($classData as $class)
+                            <option value="{{ $class->id }}" {{ old('class_id') == $class->id ? 'selected' : '' }}>
+                                {{ $class->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('class_id')
+                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Group Name
                     </label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}"
-                           class="w-full px-4 py-3 bg-white dark:bg-gray-800 border
+                        class="w-full px-4 py-3 bg-white dark:bg-gray-800 border
                            @error('name') border-red-500 @else border-gray-300 dark:border-gray-600 @enderror
                            rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none text-gray-900 dark:text-white" />
-                    @error('name') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                    @error('name')
+                        <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
 
 
-            <!-- Is School Checkbox -->
-            <div class="flex items-center space-x-3">
-                <input type="checkbox" id="is_active" name="is_active" value="1"
-                       class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                       {{ old('is_active') ? 'checked' : '' }}>
-                <label for="is_active" class="text-gray-700 dark:text-gray-300 font-medium">
-                    Is Active?
-                </label>
-            </div>
+                <!-- Is School Checkbox -->
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="is_active" name="is_active" value="1"
+                        class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                        {{ old('is_active') ? 'checked' : '' }}>
+                    <label for="is_active" class="text-gray-700 dark:text-gray-300 font-medium">
+                        Is Active?
+                    </label>
+                </div>
 
 
 
 
-            <!-- Submit -->
-            <div class="pt-6">
-                <button type="submit"
+                <!-- Submit -->
+                <div class="pt-6">
+                    <button type="submit"
                         class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center space-x-2">
-                    <span>Create Group</span>
-                </button>
-            </div>
+                        <span>Create Group</span>
+                    </button>
+                </div>
         </form>
     </div>
 

@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('group_modules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('class_id');
             $table->text('name')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
 
                  // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('class_id')->references('id')->on('class_modules')->onDelete('cascade');
         });
     }
 

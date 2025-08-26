@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Interfaces\GroupModuleRepositoryInterface;
+use App\Models\ClassModule;
 use App\Models\GroupModule;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
@@ -41,8 +42,8 @@ class GroupModuleController extends Controller  implements HasMiddleware
     {
         $data = $this->groupModuleRepository->all();
 
-        $allColumns = ['name', 'created_by', 'created_at', 'is_active',];
-        $visibleColumns = ['name', 'created_by', 'created_at', 'is_active'];
+        $allColumns = ['name', 'class_name', 'created_by', 'created_at', 'is_active',];
+        $visibleColumns = ['name', 'class_name', 'created_by', 'created_at', 'is_active'];
         return view('dashboard.pages.group.index', compact('data', 'allColumns', 'visibleColumns'));
     }
 
@@ -51,7 +52,9 @@ class GroupModuleController extends Controller  implements HasMiddleware
      */
     public function create()
     {
-        return view("dashboard.pages.group.create");
+        $classData = ClassModule::where('is_active', 1)->get();
+
+        return view("dashboard.pages.group.create", compact('classData'));
     }
 
     /**
@@ -61,7 +64,8 @@ class GroupModuleController extends Controller  implements HasMiddleware
     {
         $validated = $request->validate([
             'name'          => 'required|string|max:255',
-            'is_active'     => 'nullable|boolean'
+            'is_active'     => 'nullable|boolean',
+            'class_id' =>   'required'
         ]);
 
         try {
@@ -90,18 +94,20 @@ class GroupModuleController extends Controller  implements HasMiddleware
     public function edit($id)
     {
         $classModule = $this->groupModuleRepository->find($id); // eager load profile and roles
+        $classData = ClassModule::where('is_active', 1)->get();
 
-        return view('dashboard.pages.group.edit', compact('classModule'));
+        return view('dashboard.pages.group.edit', compact('classModule', 'classData'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-     public function update(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'name'          => 'required|string|max:255',
-            'is_active'     => 'nullable|boolean'
+            'is_active'     => 'nullable|boolean',
+            'class_id' => 'required'
         ]);
 
         try {

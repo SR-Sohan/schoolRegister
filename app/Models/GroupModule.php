@@ -9,6 +9,7 @@ class GroupModule extends Model
     protected $fillable = [
         'name',
         'user_id',
+        'class_id',
         'is_active'
     ];
 
@@ -18,4 +19,11 @@ class GroupModule extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+     public function class()
+    {
+        return $this->belongsTo(ClassModule::class);
+    }
+
+
 }

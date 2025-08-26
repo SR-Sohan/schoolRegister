@@ -21,6 +21,26 @@
             <!-- Row: Name + Email -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
+
+                  <div>
+                    <label for="class_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Select Class
+                    </label>
+                    <select name="class_id" id="class_id"
+                            class="w-full px-4 py-3 bg-white dark:bg-gray-800 border
+                            @error('class_id') border-red-500 @else border-gray-300 dark:border-gray-600 @enderror
+                            rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:outline-none text-gray-900 dark:text-white">
+                        <option value="">-- Select a Class --</option>
+                        @foreach($classData as $class)
+                            <option value="{{ $class->id }}"
+                                    {{ old('class_id', $classModule->class_id) == $class->id ? 'selected' : '' }}>
+                                {{ $class->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('class_id') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                </div>
+
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                         Class Name
