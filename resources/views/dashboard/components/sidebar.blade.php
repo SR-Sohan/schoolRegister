@@ -57,7 +57,7 @@
 
                         @canany(['sessions-group.view', 'sessions-group.create', 'sessions-group.edit',
                             'sessions-group.delete'])
-                            <a href=""
+                            <a href="{{ route('groupmodule.index') }}"
                                 class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
                                 Manage Group</a>
                         @endcanany

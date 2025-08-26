@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="head">
-        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Create Class</h1>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Create Group</h1>
     </x-slot>
 
     <div class="glass-effect rounded-2xl p-8 shadow-2xl bg-white dark:bg-gray-900">
@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('classmodule.store') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+        <form action="{{ route('groupmodule.store') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
             @csrf
 
             <!-- Row: Name + Email -->
@@ -22,7 +22,7 @@
 
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Class Name
+                        Group Name
                     </label>
                     <input type="text" name="name" id="name" value="{{ old('name') }}"
                            class="w-full px-4 py-3 bg-white dark:bg-gray-800 border
@@ -50,7 +50,7 @@
             <div class="pt-6">
                 <button type="submit"
                         class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center space-x-2">
-                    <span>Create Class</span>
+                    <span>Create Group</span>
                 </button>
             </div>
         </form>

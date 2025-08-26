@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="head">
-        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Create Institute</h1>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Class Edit</h1>
     </x-slot>
 
     <div class="glass-effect rounded-2xl p-8 shadow-2xl bg-white dark:bg-gray-900">

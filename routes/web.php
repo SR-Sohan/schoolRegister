@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClassModuleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GroupModuleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserProfileController;
@@ -21,6 +22,9 @@ Route::prefix('oxadmin')->middleware(['auth', 'verified'])->group(function () {
 
     // Class Manage
     Route::resource('classmodule',ClassModuleController::class);
+
+    //Group Manage
+    Route::resource('groupmodule',GroupModuleController::class);
 
     // role permission
     Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
