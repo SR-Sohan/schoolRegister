@@ -130,7 +130,7 @@
                                         class="action-dropdown hidden fixed bg-white dark:bg-gray-800 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-gray-600 border border-gray-100 dark:border-gray-700 min-w-[14rem] dropdown-menu">
                                         <div class="py-2" role="menu">
 
-                                            <a href="{{ route('userprofile.edit',$row->id) }}"
+                                            <a href="{{ route('classmodule.edit',$row->id) }}"
                                                 class="dropdown-link group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-800 dark:hover:text-blue-200 transition-colors duration-150"
                                                 role="menuitem">
                                                 <svg class="w-4 h-4 mr-3 text-gray-400 group-hover:text-blue-500"
@@ -142,7 +142,7 @@
                                                 Edit
                                             </a>
 
-                                          <form action="{{ route('userprofile.destroy', $row->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                          <form action="{{ route('classmodule.destroy', $row->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

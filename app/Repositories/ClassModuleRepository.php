@@ -40,10 +40,25 @@ class ClassModuleRepository implements ClassModuleRepositoryInterface
 
     public function update($id, array $data)
     {
-        $model = ClassModule::findOrFail($id);
-        $model->update($data);
-        return $model;
+        try {
+            $data['is_active'] = $data['is_active'] ?? 0;
+
+            $class = ClassModule::findOrFail($id);
+
+            $class->update($data);
+
+            return $class;
+        } catch (\Exception $e) {
+            Log::error('Class update failed: ' . $e->getMessage(), [
+                'user_id' => Auth::id(),
+                'class_id' => $id,
+                'input_data' => $data,
+            ]);
+
+            throw new \Exception('Class update failed. Please try again later.');
+        }
     }
+
 
     public function delete($id)
     {
