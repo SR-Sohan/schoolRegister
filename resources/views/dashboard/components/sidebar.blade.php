@@ -50,7 +50,7 @@
 
                         @canany(['sessions-class.view', 'sessions-class.create', 'sessions-class.edit',
                             'sessions-class.delete'])
-                            <a href=""
+                            <a href="{{ route('classmodule.index') }}"
                                 class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-150">
                                 Mange Class</a>
                         @endcanany

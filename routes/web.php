@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClassModuleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
@@ -17,6 +18,9 @@ Route::prefix('oxadmin')->middleware(['auth', 'verified'])->group(function () {
     // User Profile with Create user
     Route::resource('userprofile',UserProfileController::class);
 
+
+    // Class Manage
+    Route::resource('classmodule',ClassModuleController::class);
 
     // role permission
     Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
