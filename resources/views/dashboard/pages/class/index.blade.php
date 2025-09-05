@@ -1,5 +1,7 @@
 <x-app-layout>
-
+<x-slot name="head">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Classes</h1>
+    </x-slot>
 
     <div class=" gap-2 mb-6 relative z-30">
         {{-- <h1>{{ $title }}</h1> --}}

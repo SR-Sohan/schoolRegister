@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('group_subject', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('group_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('subject_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('group_id')->constrained('group_modules')->cascadeOnDelete();
+            $table->foreignId('subject_id')->constrained('subjects')->cascadeOnDelete();
             $table->timestamps();
 
             $table->unique(['group_id', 'subject_id']); // prevent duplicates

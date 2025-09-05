@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GroupModuleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::prefix('oxadmin')->middleware(['auth', 'verified'])->group(function () {
 
     //Group Manage
     Route::resource('groupmodule',GroupModuleController::class);
+
+    // Subject Manage
+    Route::resource('subject',SubjectController::class);
 
     // role permission
     Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');

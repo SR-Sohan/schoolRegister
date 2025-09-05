@@ -1,14 +1,14 @@
 <x-app-layout>
-
-<x-slot name="head">
-        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">Users</h1>
+    <x-slot name="head">
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100"> Subjects</h1>
     </x-slot>
+
     <div class=" gap-2 mb-6 relative z-30">
         {{-- <h1>{{ $title }}</h1> --}}
         <!-- Action Buttons -->
         <div class="flex flex-wrap justify-end">
 
-            <a href="{{ route('userprofile.create') }}"
+            <a href="{{ route('subject.create') }}"
                 class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow transition">Create</a>
 
 
@@ -102,11 +102,37 @@
                                                 class="w-1.5 h-1.5 rounded-full {{ $row->is_active ? 'bg-green-400' : 'bg-red-400' }} mr-1.5"></span>
                                             {{ $row->is_active ? 'Active' : 'Inactive' }}
                                         </span>
-                                    @elseif ($col === 'school_name')
-                                        {{ $row->profile->school_name ?? '-' }}
-                                    @elseif ($col === 'address')
-                                        {{ $row->profile->address ?? '-' }}
-
+                                    @elseif ($col === 'created_by')
+                                        {{ $row->user->name ?? '-' }}
+                                    @elseif ($col === 'is_optional')
+                                        @if (isset($row->is_optional))
+                                            @if ($row->is_optional)
+                                                <span
+                                                    class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full dark:bg-green-800 dark:text-green-100">
+                                                    Optional
+                                                </span>
+                                            @else
+                                                <span
+                                                    class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full dark:bg-blue-800 dark:text-blue-100">
+                                                    Compulsory
+                                                </span>
+                                            @endif
+                                        @else
+                                            -
+                                        @endif
+                                    @elseif ($col === 'groups')
+                                        @if ($row->groups && $row->groups->count() > 0)
+                                            <div class="flex flex-wrap gap-1">
+                                                @foreach ($row->groups as $group)
+                                                    <span
+                                                        class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded-full dark:bg-blue-800 dark:text-blue-100">
+                                                        {{ $group->name }}
+                                                    </span>
+                                                @endforeach
+                                            </div>
+                                        @else
+                                            -
+                                        @endif
                                     @else
                                         {{ $row->$col ?? '-' }}
                                     @endif
@@ -132,7 +158,7 @@
                                         class="action-dropdown hidden fixed bg-white dark:bg-gray-800 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-gray-600 border border-gray-100 dark:border-gray-700 min-w-[14rem] dropdown-menu">
                                         <div class="py-2" role="menu">
 
-                                            <a href="{{ route('userprofile.edit',$row->id) }}"
+                                            <a href="{{ route('groupmodule.edit', $row->id) }}"
                                                 class="dropdown-link group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-800 dark:hover:text-blue-200 transition-colors duration-150"
                                                 role="menuitem">
                                                 <svg class="w-4 h-4 mr-3 text-gray-400 group-hover:text-blue-500"
@@ -144,21 +170,25 @@
                                                 Edit
                                             </a>
 
-                                          <form action="{{ route('userprofile.destroy', $row->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this user?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="dropdown-link group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-800 dark:hover:text-red-200 transition-colors duration-150">
-                                                <svg class="w-4 h-4 mr-3 text-gray-400 group-hover:text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                                </svg>
-                                                Delete
-                                            </button>
-                                        </form>
+                                            <form action="{{ route('groupmodule.destroy', $row->id) }}" method="POST"
+                                                class="inline-block"
+                                                onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="dropdown-link group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-red-50 dark:hover:bg-gray-700 hover:text-red-800 dark:hover:text-red-200 transition-colors duration-150">
+                                                    <svg class="w-4 h-4 mr-3 text-gray-400 group-hover:text-red-500"
+                                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                    </svg>
+                                                    Delete
+                                                </button>
+                                            </form>
 
 
-                                            <a href="{{ route('userprofile.show',$row->id) }}"
+                                            <a href="{{ route('userprofile.show', $row->id) }}"
                                                 class="dropdown-link group flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-green-50 dark:hover:bg-gray-700 hover:text-green-800 dark:hover:text-green-200 transition-colors duration-150"
                                                 role="menuitem">
                                                 <svg class="w-4 h-4 mr-3 text-gray-400 group-hover:text-green-500"

@@ -56,16 +56,21 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class, 'user_id', 'id');
     }
 
-     public function classModule(): HasMany
+    public function classModule(): HasMany
     {
         return $this->hasMany(ClassModule::class, 'user_id', 'id');
     }
 
-      public function groupModule(): HasMany
+    public function groupModule(): HasMany
     {
         return $this->hasMany(groupModule::class, 'user_id', 'id');
     }
 
+
+    public function subject(): HasMany
+    {
+        return $this->hasMany(subject::class, 'user_id', 'id');
+    }
 
     // Cascade delete profile when user is deleted
     protected static function booted()

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->boolean('is_optional')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
 
-                  // Foreign key constraint
+            // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

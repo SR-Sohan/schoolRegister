@@ -9,7 +9,7 @@ class SubjectRepository implements SubjectRepositoryInterface
 {
     public function all()
     {
-        return Subject::all();
+        return Subject::with('groups')->get();
     }
 
     public function find($id)

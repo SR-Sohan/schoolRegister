@@ -25,5 +25,11 @@ class GroupModule extends Model
         return $this->belongsTo(ClassModule::class);
     }
 
+      public function subjects()
+    {
+        return $this->belongsToMany(Subject::class, 'group_subject')
+                    ->withTimestamps();
+    }
+
 
 }
