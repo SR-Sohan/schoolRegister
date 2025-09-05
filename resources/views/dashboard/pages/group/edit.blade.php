@@ -43,7 +43,7 @@
 
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                        Class Name
+                        Group Name
                     </label>
                     <input type="text" name="name" id="name" value="{{ $classModule->name}}"
                            class="w-full px-4 py-3 bg-white dark:bg-gray-800 border
