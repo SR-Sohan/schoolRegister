@@ -14,7 +14,7 @@ class SubjectRepository implements SubjectRepositoryInterface
 
     public function find($id)
     {
-        return Subject::findOrFail($id);
+        return Subject::with('groups')->findOrFail($id);
     }
 
     public function create(array $data)
